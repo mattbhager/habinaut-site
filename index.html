@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habinaut — Track Habits. Build Civilizations. Explore the Galaxy.</title>
+<meta name="description" content="A habit tracking app where your daily health habits fuel an alien civilization's evolution through technology eras to space travel. Designed for ADHD brains.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#080E1A;
+--bg2:#0E1A2E;
+--cyan:#06B6D4;
+--purple:#8B5CF6;
+--magenta:#D946EF;
+--text:#E2E8F0;
+--muted:#94A3B8;
+--font:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--bg);
+color:var(--text);
+font-family:var(--font);
+line-height:1.7;
+overflow-x:hidden;
+}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}
+a:hover{color:var(--magenta)}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:2rem;
+position:relative;
+overflow:hidden;
+}
+.hero::before{
+content:'';
+position:absolute;
+top:50%;left:50%;
+width:600px;height:600px;
+transform:translate(-50%,-50%);
+background:radial-gradient(circle,rgba(6,182,212,0.08) 0%,rgba(139,92,246,0.04) 40%,transparent 70%);
+border-radius:50%;
+pointer-events:none;
+}
+.hero-logo{
+font-size:clamp(2.5rem,6vw,4.5rem);
+font-weight:700;
+letter-spacing:0.15em;
+margin-bottom:0.5rem;
+background:linear-gradient(135deg,var(--cyan),var(--purple));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+animation:fadeUp .8s ease both;
+}
+.hero-tagline{
+font-size:clamp(1rem,2.5vw,1.4rem);
+font-weight:300;
+color:var(--muted);
+letter-spacing:0.08em;
+margin-bottom:2.5rem;
+animation:fadeUp .8s ease .2s both;
+}
+.hero-desc{
+max-width:580px;
+font-size:1.05rem;
+color:var(--muted);
+margin-bottom:3rem;
+animation:fadeUp .8s ease .4s both;
+}
+.hero-cta{
+display:inline-flex;
+align-items:center;
+gap:0.5rem;
+padding:0.85rem 2rem;
+border:1px solid var(--cyan);
+border-radius:8px;
+color:var(--cyan);
+font-family:var(--font);
+font-size:1rem;
+font-weight:500;
+letter-spacing:0.05em;
+transition:all .3s;
+animation:fadeUp .8s ease .6s both;
+}
+.hero-cta:hover{
+background:rgba(6,182,212,0.1);
+color:var(--text);
+border-color:var(--text);
+}
+
+.features{
+padding:6rem 2rem;
+max-width:900px;
+margin:0 auto;
+}
+.features h2{
+font-size:1.8rem;
+font-weight:600;
+text-align:center;
+margin-bottom:3rem;
+color:var(--text);
+}
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:2rem;
+}
+.feature-card{
+background:var(--bg2);
+border:1px solid rgba(139,92,246,0.15);
+border-radius:12px;
+padding:2rem;
+transition:border-color .3s,transform .3s;
+}
+.feature-card:hover{
+border-color:rgba(6,182,212,0.4);
+transform:translateY(-4px);
+}
+.feature-icon{
+font-size:1.8rem;
+margin-bottom:1rem;
+display:block;
+}
+.feature-card h3{
+font-size:1.1rem;
+font-weight:600;
+margin-bottom:0.5rem;
+color:var(--cyan);
+}
+.feature-card p{
+font-size:0.95rem;
+color:var(--muted);
+line-height:1.6;
+}
+
+.adhd-section{
+padding:4rem 2rem;
+max-width:700px;
+margin:0 auto;
+text-align:center;
+}
+.adhd-section h2{
+font-size:1.8rem;
+font-weight:600;
+margin-bottom:1.5rem;
+background:linear-gradient(135deg,var(--magenta),var(--cyan));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+.adhd-section p{
+color:var(--muted);
+font-size:1.05rem;
+margin-bottom:1rem;
+}
+
+.footer{
+padding:3rem 2rem;
+text-align:center;
+border-top:1px solid rgba(255,255,255,0.06);
+margin-top:4rem;
+}
+.footer-links{
+display:flex;
+justify-content:center;
+gap:2rem;
+margin-bottom:1.5rem;
+flex-wrap:wrap;
+}
+.footer-links a{
+color:var(--muted);
+font-size:0.9rem;
+transition:color .2s;
+}
+.footer-links a:hover{color:var(--cyan)}
+.footer-copy{
+color:rgba(148,163,184,0.5);
+font-size:0.8rem;
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:600px){
+.feature-grid{grid-template-columns:1fr}
+.footer-links{flex-direction:column;gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="hero-logo">HABINAUT</div>
+<div class="hero-tagline">TRACK · BUILD · EXPLORE</div>
+<p class="hero-desc">
+A habit tracking app where completing daily health habits fuels the evolution of an alien civilization. 
+Track your meds, workouts, and habits. Watch your aliens grow from crash landing to space travel. Colonize the galaxy.
+</p>
+<a href="#features" class="hero-cta">Learn More ↓</a>
+</section>
+
+<section class="features" id="features">
+<h2>How It Works</h2>
+<div class="feature-grid">
+<div class="feature-card">
+<span class="feature-icon">💊</span>
+<h3>Track Daily Habits</h3>
+<p>Log medications, supplements, workouts, and custom habits. Grouped by time, checked off in seconds. Your daily routine, simplified.</p>
+</div>
+<div class="feature-card">
+<span class="feature-icon">⚡</span>
+<h3>Earn XP Instantly</h3>
+<p>Every check-off generates experience points immediately. No waiting, no batching. Your progress is real-time and visible.</p>
+</div>
+<div class="feature-card">
+<span class="feature-icon">🪐</span>
+<h3>Evolve Your Civilization</h3>
+<p>XP fuels an alien civilization that progresses through 9 technology eras — from crash landing to space travel. Your habits drive their story.</p>
+</div>
+<div class="feature-card">
+<span class="feature-icon">🚀</span>
+<h3>Colonize the Galaxy</h3>
+<p>Launch your civilization into space and start fresh on a new planet. Each world is unique. Build a galaxy map of your consistency.</p>
+</div>
+<div class="feature-card">
+<span class="feature-icon">🏋️</span>
+<h3>Full Workout Tracking</h3>
+<p>Build templates, log sets and reps, track PRs, run multi-week programs. Per-set tracking with automatic personal record detection.</p>
+</div>
+<div class="feature-card">
+<span class="feature-icon">🎯</span>
+<h3>Shame-Free Design</h3>
+<p>No guilt mechanics. No red "missed" indicators. Warm return-after-absence experience. Built for humans who sometimes forget — and that's okay.</p>
+</div>
+</div>
+</section>
+
+<section class="adhd-section">
+<h2>Designed for ADHD Brains</h2>
+<p>
+Habinaut is built around ADHD psychology principles. Immediate rewards on every tap. 
+Variable novelty that prevents habituation. Zero-friction daily flow that takes under 2 minutes. 
+Gentle accountability over rigid structure.
+</p>
+<p>
+Your habits drive progress, not money. No pay-to-win. No dark patterns. 
+Just a fun reason to take your meds and do your workouts.
+</p>
+</section>
+
+<footer class="footer">
+<div class="footer-links">
+<a href="/privacy">Privacy Policy</a>
+<a href="/terms">Terms of Service</a>
+<a href="mailto:support@habinaut.com">Contact</a>
+</div>
+<p class="footer-copy">&copy; 2026 Habinaut LLC. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
