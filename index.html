@@ -5,269 +5,516 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Habinaut — Track Habits. Build Civilizations. Explore the Galaxy.</title>
 <meta name="description" content="A habit tracking app where your daily health habits fuel an alien civilization's evolution through technology eras to space travel. Designed for ADHD brains.">
+<meta property="og:title" content="Habinaut — Track · Build · Explore">
+<meta property="og:description" content="Your daily habits fuel an alien civilization. Track doses, workouts, and habits. Watch your aliens evolve. Colonize the galaxy.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://habinaut.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#080E1A;
---bg2:#0E1A2E;
---cyan:#06B6D4;
---purple:#8B5CF6;
---magenta:#D946EF;
---text:#E2E8F0;
---muted:#94A3B8;
---font:'Outfit',sans-serif;
+  --bg:#080E1A;
+  --bg-card:rgba(14,26,46,0.7);
+  --bg-card-solid:#0E1A2E;
+  --cyan:#06B6D4;
+  --cyan-glow:rgba(6,182,212,0.15);
+  --purple:#8B5CF6;
+  --purple-glow:rgba(139,92,246,0.12);
+  --magenta:#D946EF;
+  --magenta-glow:rgba(217,70,239,0.12);
+  --green:#22C55E;
+  --amber:#F59E0B;
+  --text:#E2E8F0;
+  --text-bright:#F8FAFC;
+  --muted:#94A3B8;
+  --muted-dim:#64748B;
+  --border:rgba(139,92,246,0.12);
+  --border-hover:rgba(6,182,212,0.35);
+  --font:'Outfit',system-ui,sans-serif;
+  --mono:'Space Mono',monospace;
 }
 html{scroll-behavior:smooth}
 body{
-background:var(--bg);
-color:var(--text);
-font-family:var(--font);
-line-height:1.7;
-overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
-a{color:var(--cyan);text-decoration:none;transition:color .2s}
+a{color:var(--cyan);text-decoration:none;transition:color .25s}
 a:hover{color:var(--magenta)}
 
+/* ============================================
+   HERO — Full-bleed scene image
+   ============================================ */
 .hero{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:2rem;
-position:relative;
-overflow:hidden;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  text-align:center;
+  padding:2rem 2rem 4rem;
+  position:relative;
+  overflow:hidden;
+  background:#080E1A;
 }
-.hero::before{
-content:'';
-position:absolute;
-top:50%;left:50%;
-width:600px;height:600px;
-transform:translate(-50%,-50%);
-background:radial-gradient(circle,rgba(6,182,212,0.08) 0%,rgba(139,92,246,0.04) 40%,transparent 70%);
-border-radius:50%;
-pointer-events:none;
+
+/* Hero background image — replace src with your era scene */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:
+    url('hero-scene.webp') center center / cover no-repeat;
+  opacity:0.55;
+  animation:heroFadeIn 1.5s ease both;
 }
+.hero-bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom, 
+      transparent 0%, 
+      transparent 40%,
+      rgba(8,14,26,0.4) 60%,
+      rgba(8,14,26,0.85) 80%,
+      var(--bg) 100%
+    );
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+}
+
 .hero-logo{
-font-size:clamp(2.5rem,6vw,4.5rem);
-font-weight:700;
-letter-spacing:0.15em;
-margin-bottom:0.5rem;
-background:linear-gradient(135deg,var(--cyan),var(--purple));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-background-clip:text;
-animation:fadeUp .8s ease both;
+  font-size:clamp(3rem,8vw,5.5rem);
+  font-weight:800;
+  letter-spacing:0.12em;
+  line-height:1;
+  margin-bottom:0.6rem;
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 50%,var(--magenta) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 40px rgba(6,182,212,0.3));
+  animation:fadeUp .8s ease both;
 }
+
 .hero-tagline{
-font-size:clamp(1rem,2.5vw,1.4rem);
-font-weight:300;
-color:var(--muted);
-letter-spacing:0.08em;
-margin-bottom:2.5rem;
-animation:fadeUp .8s ease .2s both;
+  font-family:var(--mono);
+  font-size:clamp(0.85rem,2vw,1.1rem);
+  font-weight:400;
+  color:var(--muted);
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  margin-bottom:1.8rem;
+  animation:fadeUp .8s ease .15s both;
 }
+
 .hero-desc{
-max-width:580px;
-font-size:1.05rem;
-color:var(--muted);
-margin-bottom:3rem;
-animation:fadeUp .8s ease .4s both;
+  font-size:clamp(1rem,2.2vw,1.15rem);
+  font-weight:300;
+  color:var(--text);
+  line-height:1.75;
+  margin-bottom:2.5rem;
+  animation:fadeUp .8s ease .3s both;
 }
+
 .hero-cta{
-display:inline-flex;
-align-items:center;
-gap:0.5rem;
-padding:0.85rem 2rem;
-border:1px solid var(--cyan);
-border-radius:8px;
-color:var(--cyan);
-font-family:var(--font);
-font-size:1rem;
-font-weight:500;
-letter-spacing:0.05em;
-transition:all .3s;
-animation:fadeUp .8s ease .6s both;
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  padding:0.9rem 2.2rem;
+  border:1px solid var(--cyan);
+  border-radius:99px;
+  color:var(--cyan);
+  font-family:var(--font);
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:0.04em;
+  transition:all .3s ease;
+  animation:fadeUp .8s ease .45s both;
+  background:rgba(6,182,212,0.06);
+  backdrop-filter:blur(8px);
 }
 .hero-cta:hover{
-background:rgba(6,182,212,0.1);
-color:var(--text);
-border-color:var(--text);
+  background:rgba(6,182,212,0.15);
+  color:var(--text-bright);
+  border-color:var(--text);
+  box-shadow:0 0 30px rgba(6,182,212,0.2);
+  transform:translateY(-2px);
+}
+.hero-cta svg{
+  width:18px;height:18px;
+  transition:transform .3s;
+}
+.hero-cta:hover svg{transform:translateY(3px)}
+
+/* Scroll hint */
+.scroll-hint{
+  position:absolute;
+  bottom:1.5rem;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  animation:fadeUp .8s ease .8s both, bobble 2s ease-in-out infinite 1.5s;
+  opacity:0.4;
+}
+.scroll-hint svg{width:24px;height:24px;color:var(--muted)}
+
+/* ============================================
+   FEATURES — Card grid
+   ============================================ */
+.features{
+  padding:6rem 2rem 4rem;
+  max-width:960px;
+  margin:0 auto;
+  position:relative;
 }
 
-.features{
-padding:6rem 2rem;
-max-width:900px;
-margin:0 auto;
+.section-label{
+  font-family:var(--mono);
+  font-size:0.8rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--cyan);
+  text-align:center;
+  margin-bottom:0.75rem;
 }
+
 .features h2{
-font-size:1.8rem;
-font-weight:600;
-text-align:center;
-margin-bottom:3rem;
-color:var(--text);
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:700;
+  text-align:center;
+  margin-bottom:1rem;
+  color:var(--text-bright);
 }
+
+.features-subtitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:1.05rem;
+  max-width:520px;
+  margin:0 auto 3.5rem;
+}
+
 .feature-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:2rem;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.25rem;
 }
+
 .feature-card{
-background:var(--bg2);
-border:1px solid rgba(139,92,246,0.15);
-border-radius:12px;
-padding:2rem;
-transition:border-color .3s,transform .3s;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.75rem;
+  transition:all .35s ease;
+  backdrop-filter:blur(12px);
+  position:relative;
+  overflow:hidden;
+}
+.feature-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan-glow),transparent);
+  opacity:0;
+  transition:opacity .35s;
 }
 .feature-card:hover{
-border-color:rgba(6,182,212,0.4);
-transform:translateY(-4px);
+  border-color:var(--border-hover);
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.3);
 }
+.feature-card:hover::before{opacity:1}
+
 .feature-icon{
-font-size:1.8rem;
-margin-bottom:1rem;
-display:block;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.4rem;
+  margin-bottom:1rem;
+  position:relative;
 }
+.feature-icon.cyan{background:var(--cyan-glow);box-shadow:0 0 20px var(--cyan-glow)}
+.feature-icon.purple{background:var(--purple-glow);box-shadow:0 0 20px var(--purple-glow)}
+.feature-icon.magenta{background:var(--magenta-glow);box-shadow:0 0 20px var(--magenta-glow)}
+.feature-icon.green{background:rgba(34,197,94,0.12);box-shadow:0 0 20px rgba(34,197,94,0.1)}
+.feature-icon.amber{background:rgba(245,158,11,0.12);box-shadow:0 0 20px rgba(245,158,11,0.1)}
+
 .feature-card h3{
-font-size:1.1rem;
-font-weight:600;
-margin-bottom:0.5rem;
-color:var(--cyan);
+  font-size:1.05rem;
+  font-weight:600;
+  margin-bottom:0.4rem;
+  color:var(--text-bright);
 }
 .feature-card p{
-font-size:0.95rem;
-color:var(--muted);
-line-height:1.6;
+  font-size:0.9rem;
+  color:var(--muted);
+  line-height:1.65;
 }
 
+/* ============================================
+   ADHD SECTION
+   ============================================ */
 .adhd-section{
-padding:4rem 2rem;
-max-width:700px;
-margin:0 auto;
-text-align:center;
+  padding:4rem 2rem 5rem;
+  max-width:700px;
+  margin:0 auto;
+  text-align:center;
+  position:relative;
 }
+.adhd-section::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:500px;height:300px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse,var(--magenta-glow) 0%,transparent 70%);
+  pointer-events:none;
+  opacity:0.5;
+}
+.adhd-section .section-label{color:var(--magenta)}
+
 .adhd-section h2{
-font-size:1.8rem;
-font-weight:600;
-margin-bottom:1.5rem;
-background:linear-gradient(135deg,var(--magenta),var(--cyan));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-background-clip:text;
-}
-.adhd-section p{
-color:var(--muted);
-font-size:1.05rem;
-margin-bottom:1rem;
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:700;
+  margin-bottom:1.5rem;
+  color:var(--text-bright);
+  position:relative;
 }
 
+.adhd-pills{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:0.6rem;
+  margin-bottom:2rem;
+  position:relative;
+}
+.adhd-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:0.4rem;
+  padding:0.5rem 1rem;
+  border-radius:99px;
+  font-size:0.85rem;
+  font-weight:500;
+  border:1px solid var(--border);
+  background:var(--bg-card);
+  color:var(--text);
+  backdrop-filter:blur(8px);
+}
+.adhd-pill .dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  display:inline-block;
+}
+.dot.cyan{background:var(--cyan)}
+.dot.purple{background:var(--purple)}
+.dot.magenta{background:var(--magenta)}
+.dot.green{background:var(--green)}
+.dot.amber{background:var(--amber)}
+
+.adhd-section .body-text{
+  color:var(--muted);
+  font-size:1.05rem;
+  line-height:1.8;
+  position:relative;
+  max-width:560px;
+  margin:0 auto;
+}
+.adhd-section .body-text strong{
+  color:var(--text);
+  font-weight:500;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
 .footer{
-padding:3rem 2rem;
-text-align:center;
-border-top:1px solid rgba(255,255,255,0.06);
-margin-top:4rem;
+  padding:3rem 2rem;
+  text-align:center;
+  border-top:1px solid var(--border);
+  margin-top:2rem;
 }
 .footer-links{
-display:flex;
-justify-content:center;
-gap:2rem;
-margin-bottom:1.5rem;
-flex-wrap:wrap;
+  display:flex;
+  justify-content:center;
+  gap:2rem;
+  margin-bottom:1.2rem;
+  flex-wrap:wrap;
 }
 .footer-links a{
-color:var(--muted);
-font-size:0.9rem;
-transition:color .2s;
+  color:var(--muted-dim);
+  font-size:0.85rem;
+  transition:color .25s;
 }
 .footer-links a:hover{color:var(--cyan)}
 .footer-copy{
-color:rgba(148,163,184,0.5);
-font-size:0.8rem;
+  color:rgba(148,163,184,0.35);
+  font-size:0.78rem;
+  letter-spacing:0.02em;
 }
 
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes fadeUp{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes heroFadeIn{
+  from{opacity:0;transform:scale(1.05)}
+  to{opacity:0.55;transform:scale(1)}
+}
+@keyframes bobble{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(6px)}
 }
 
-@media(max-width:600px){
-.feature-grid{grid-template-columns:1fr}
-.footer-links{flex-direction:column;gap:1rem}
+/* Scroll-triggered fade-in */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 0.6s ease,transform 0.6s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal:nth-child(2){transition-delay:0.08s}
+.reveal:nth-child(3){transition-delay:0.16s}
+.reveal:nth-child(4){transition-delay:0.24s}
+.reveal:nth-child(5){transition-delay:0.32s}
+.reveal:nth-child(6){transition-delay:0.40s}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media(max-width:640px){
+  .hero{padding:2rem 1.5rem 3rem}
+  .feature-grid{grid-template-columns:1fr}
+  .features{padding:4rem 1.5rem 3rem}
+  .adhd-section{padding:3rem 1.5rem 4rem}
+  .footer-links{gap:1.5rem}
+  .adhd-pills{gap:0.5rem}
 }
 </style>
 </head>
 <body>
 
+<!-- ========== HERO ========== -->
 <section class="hero">
-<div class="hero-logo">HABINAUT</div>
-<div class="hero-tagline">TRACK · BUILD · EXPLORE</div>
-<p class="hero-desc">
-A habit tracking app where completing daily health habits fuels the evolution of an alien civilization. 
-Track your daily doses, workouts, and habits. Watch your aliens grow from crash landing to space travel. Colonize the galaxy.
-</p>
-<a href="#features" class="hero-cta">Learn More ↓</a>
+  <div class="hero-bg" role="presentation"></div>
+  <div class="hero-content">
+    <div class="hero-logo">HABINAUT</div>
+    <div class="hero-tagline">Track · Build · Explore</div>
+    <p class="hero-desc">
+      Your daily habits fuel an alien civilization. Track doses, workouts, and routines — 
+      every check-off earns XP that evolves your aliens from crash landing to interplanetary explorers.
+    </p>
+    <a href="#features" class="hero-cta">
+      See How It Works
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+  </div>
 </section>
 
+<!-- ========== FEATURES ========== -->
 <section class="features" id="features">
-<h2>How It Works</h2>
-<div class="feature-grid">
-<div class="feature-card">
-<span class="feature-icon">💊</span>
-<h3>Track Daily Habits</h3>
-<p>Log daily doses, supplements, workouts, and custom habits. Grouped by time, checked off in seconds. Your daily routine, simplified.</p>
-</div>
-<div class="feature-card">
-<span class="feature-icon">⚡</span>
-<h3>Earn XP Instantly</h3>
-<p>Every check-off generates experience points immediately. No waiting, no batching. Your progress is real-time and visible.</p>
-</div>
-<div class="feature-card">
-<span class="feature-icon">🪐</span>
-<h3>Evolve Your Civilization</h3>
-<p>XP fuels an alien civilization that progresses through 9 technology eras — from crash landing to space travel. Your habits drive their story.</p>
-</div>
-<div class="feature-card">
-<span class="feature-icon">🚀</span>
-<h3>Colonize the Galaxy</h3>
-<p>Launch your civilization into space and start fresh on a new planet. Each world is unique. Build a galaxy map of your consistency.</p>
-</div>
-<div class="feature-card">
-<span class="feature-icon">🏋️</span>
-<h3>Full Workout Tracking</h3>
-<p>Build templates, log sets and reps, track PRs, run multi-week programs. Per-set tracking with automatic personal record detection.</p>
-</div>
-<div class="feature-card">
-<span class="feature-icon">🎯</span>
-<h3>Shame-Free Design</h3>
-<p>No guilt mechanics. No red "missed" indicators. Warm return-after-absence experience. Built for humans who sometimes forget — and that's okay.</p>
-</div>
-</div>
+  <div class="section-label">How It Works</div>
+  <h2>Your Habits Build Worlds</h2>
+  <p class="features-subtitle">A daily loop that takes under two minutes — and builds something you care about.</p>
+  
+  <div class="feature-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon cyan">💊</div>
+      <h3>Track Daily Habits</h3>
+      <p>Log daily doses, supplements, workouts, and custom habits. Grouped by time, checked off in seconds. Your daily routine, simplified.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon purple">⚡</div>
+      <h3>Earn XP Instantly</h3>
+      <p>Every check-off generates experience points immediately. No waiting, no batching. Your progress is real-time and visible.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon magenta">🪐</div>
+      <h3>Evolve Your Civilization</h3>
+      <p>XP fuels an alien civilization that progresses through 9 technology eras — from crash landing to space travel. Your habits drive their story.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon green">🚀</div>
+      <h3>Colonize the Galaxy</h3>
+      <p>Launch into space and start fresh on a new planet. Each world is unique. Build a galaxy map of your consistency.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon amber">🏋️</div>
+      <h3>Full Workout Tracking</h3>
+      <p>Build templates, log sets and reps, track PRs, run multi-week programs. Per-set tracking with automatic personal record detection.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon cyan">🛡️</div>
+      <h3>Shame-Free Design</h3>
+      <p>No guilt mechanics. No red "missed" indicators. Warm return-after-absence experience. Built for humans who sometimes forget — and that's okay.</p>
+    </div>
+  </div>
 </section>
 
+<!-- ========== ADHD ========== -->
 <section class="adhd-section">
-<h2>Designed for ADHD Brains</h2>
-<p>
-Habinaut is built around ADHD psychology principles. Immediate rewards on every tap. 
-Variable novelty that prevents habituation. Zero-friction daily flow that takes under 2 minutes. 
-Gentle accountability over rigid structure.
-</p>
-<p>
-Your habits drive progress, not money. No pay-to-win. No dark patterns. 
-Just a fun reason to take your daily doses and do your workouts.
-</p>
+  <div class="adhd-section-inner">
+    <div class="section-label">Built Different</div>
+    <h2>Designed for ADHD Brains</h2>
+    
+    <div class="adhd-pills">
+      <span class="adhd-pill"><span class="dot cyan"></span> Instant rewards</span>
+      <span class="adhd-pill"><span class="dot purple"></span> Variable novelty</span>
+      <span class="adhd-pill"><span class="dot magenta"></span> Zero friction</span>
+      <span class="adhd-pill"><span class="dot green"></span> Gentle accountability</span>
+      <span class="adhd-pill"><span class="dot amber"></span> No dark patterns</span>
+    </div>
+    
+    <p class="body-text">
+      Habinaut is built around ADHD psychology principles. <strong>Immediate rewards on every tap.</strong> 
+      Variable novelty that prevents habituation. A daily flow that takes under two minutes. 
+      Gentle accountability over rigid structure. Your habits drive everything — not money, not streaks, not guilt.
+    </p>
+  </div>
 </section>
 
+<!-- ========== FOOTER ========== -->
 <footer class="footer">
-<div class="footer-links">
-<a href="/privacy">Privacy Policy</a>
-<a href="/terms">Terms of Service</a>
-<a href="mailto:support@habinaut.com">Contact</a>
-</div>
-<p class="footer-copy">&copy; 2026 Habinaut LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="mailto:support@habinaut.com">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Habinaut LLC. All rights reserved.</p>
 </footer>
+
+<!-- Scroll reveal -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
